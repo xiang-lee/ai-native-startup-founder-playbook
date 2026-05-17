@@ -178,7 +178,16 @@ First extract or ask for:
 - Current evidence: interviews, usage data, revenue, retention, waitlist, code, demos, customer feedback, sales calls
 - Desired output: stage diagnosis, validation plan, MVP scope, launch plan, scale plan, investor narrative, or sprint plan
 
-If the stage is unclear, diagnose it before producing a roadmap.
+If enough information is present to infer a default, proceed with explicit assumptions instead of blocking on clarification. If the stage is unclear, diagnose it before producing a roadmap.
+
+For every run, include a short **Assumptions and Unknowns** section before recommendations:
+
+```markdown
+## Assumptions and Unknowns
+- Assumptions I am making:
+- Unknowns that materially affect the answer:
+- Clarifying questions to answer during the sprint, not before it:
+```
 
 ---
 
@@ -215,10 +224,12 @@ List the evidence required for the current stage.
 **Idea gaps:**
 
 - Exact user profile: role, context, workflow, frequency
+- Buyer, budget owner, influencer, and approver; note when these are different people
 - Last real occurrence of the problem
 - Current workaround and cost of workaround
 - Why existing alternatives fail
 - Behavioral willingness-to-pay signals: time, data, budget, introduction, manual workaround
+- Data access and trust constraints: sensitive data, permissions, integrations, auditability, and compliance blockers
 
 **MVP gaps:**
 
@@ -267,6 +278,8 @@ Must answer:
 - Recommended next experiment:
 ```
 
+Research quality rule: distinguish public desk research from customer evidence. Do not present TAM, trend data, competitor claims, or review snippets as validation unless they are tied to user behavior or customer conversations.
+
 #### 2. Adversarial Agent
 
 Focus: why this may fail.
@@ -280,6 +293,8 @@ Must answer:
 - Which competitor or workaround is underestimated:
 - What would make this a bad business even if the product works:
 ```
+
+For B2B or regulated workflows, explicitly test procurement, security review, integration complexity, incumbent distribution, and the risk that the user wants relief but the buyer will not fund it.
 
 #### 3. Build/Ops Agent
 
@@ -295,6 +310,8 @@ Must answer:
 - Security/data/compliance checks:
 - Operations that can be automated:
 ```
+
+If the startup is in the Idea stage, the minimal build artifact should usually be a discovery asset, clickable demo, concierge workflow, or data-access test — not production software. State what must be learned before writing production code.
 
 ---
 
@@ -333,6 +350,14 @@ Stop, narrow, or return to the previous stage if:
 - ...
 ```
 
+The sprint plan must include concrete targets, not only task categories. For Idea-stage work, specify:
+
+- Number and profile of customer interviews, usually 8–12 across user, buyer, and adjacent stakeholder personas
+- Recruiting channels and minimum response target
+- Interview script deliverable
+- Competitor/alternative review deliverable
+- Decision threshold for moving to prototype, narrowing the segment, or killing the idea
+
 ---
 
 ### Phase 5: Create reusable context assets
@@ -350,6 +375,55 @@ Recommended location inside a project:
 
 ```text
 contexts/startup_playbooks/<startup_name>/<artifact>.md
+```
+
+When writing in chat rather than editing a repository, still name the exact artifact(s) that should be created and provide a compact outline for each. Do not merely say “create assets.”
+
+---
+
+## Stage-Specific Output Requirements
+
+These requirements prevent generic advice. Include the relevant items for the diagnosed stage.
+
+### Idea-stage required outputs
+
+```markdown
+## Problem Hypothesis
+- Target user:
+- Buyer / budget owner:
+- Workflow moment:
+- Frequency:
+- Pain / cost:
+- Current workaround:
+- Why now:
+
+## Riskiest Assumptions
+1. ...
+
+## Discovery Plan
+- Interview targets:
+- Non-leading questions:
+- Evidence to capture:
+- Disconfirming evidence to seek:
+
+## Exit Criteria Before MVP
+- Build only if:
+- Narrow / pivot if:
+- Kill if:
+```
+
+### B2B workflow and finance-data addendum
+
+For products touching finance, legal, HR, health, security, or other sensitive workflows, add:
+
+```markdown
+## Trust, Data, and Procurement Checks
+- Systems of record involved:
+- Data required to test the workflow:
+- Permission/security concerns:
+- Auditability requirements:
+- Integration dependency risk:
+- Procurement path and likely objections:
 ```
 
 ---

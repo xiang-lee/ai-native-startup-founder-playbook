@@ -52,11 +52,13 @@ Use this skill to diagnose what stage my startup is in and produce a 2-week spri
 A good run should produce:
 
 - Stage diagnosis: Idea / MVP / Launch / Scale
+- Assumptions and unknowns when the input is incomplete
 - Supporting evidence and missing evidence
 - Strongest adversarial argument
 - Current-stage exit criteria
 - Kill / pivot criteria
-- 1–2 week sprint plan
+- 1–2 week sprint plan with concrete targets
+- For Idea-stage B2B workflows: problem hypothesis, discovery plan, buyer/user distinction, and trust/data/procurement checks
 - Suggested durable context assets, such as:
   - `problem_hypothesis.md`
   - `customer_discovery_plan.md`
