@@ -1,11 +1,26 @@
 ---
 name: ai-native-startup-founder-playbook
 description: Use when evaluating, validating, building, launching, or scaling an AI-native startup. Guides agents through stage diagnosis, evidence gaps, adversarial validation, MVP scope control, launch readiness, and scale readiness.
-version: 1.0.0
+version: 1.1.0
 author: Xiang Li
 license: MIT
+homepage: https://github.com/xiang-lee/ai-native-startup-founder-playbook
+repository: https://github.com/xiang-lee/ai-native-startup-founder-playbook
+keywords:
+  - ai startup
+  - founder
+  - product validation
+  - customer discovery
+  - mvp
+  - product-market fit
+  - launch readiness
+  - startup coach
+compatibility:
+  - tool-neutral
+  - markdown
+  - agent-skill
 metadata:
-  tags: [startup, ai-native, founder, validation, mvp, launch, scale, agent-workflow]
+  tags: [startup, ai-native, founder, validation, customer-discovery, product-market-fit, mvp, launch, scale, agent-workflow]
 ---
 
 # AI-Native Startup Founder Playbook
@@ -27,6 +42,16 @@ The founder's bottleneck is no longer only “Can we build this?” but:
 - Is the company ready to grow without the founder becoming the bottleneck?
 
 Use AI agents for research, coding, documentation, workflow automation, and critique. Keep founder judgment for problem selection, tradeoffs, positioning, trust, and final decisions.
+
+## AI Tool Surface Selection
+
+Use the right AI mode for the job. The model matters, but the surrounding context, tools, and permissions matter more.
+
+- **Conversational mode:** quick critique, rewrites, founder thinking partner, premortems, scenario analysis.
+- **Workspace / cowork mode:** research across files and systems, interview synthesis, market maps, recurring reports, CRM/documentation workflows.
+- **Coding / agentic development mode:** code generation, tests, refactors, security scans, architecture audits, API/webhook/SDK integration work.
+
+Do not give a coding agent broad implementation tasks until the current stage has enough evidence and a written scope.
 
 ---
 
@@ -80,6 +105,23 @@ Do not use this skill for:
 - Mistaking founder conviction for evidence
 - Building before understanding the user’s current workflow
 
+#### Customer Discovery Protocol
+
+For Idea-stage work, do not ask whether people like the idea. Test real past behavior.
+
+Define:
+
+- Interview target profile: job title, company type, team structure, seniority, painful workflow proximity, and where this person can be reached.
+- Persona separation: daily user, economic buyer, influencer, blocker, admin/implementer, procurement or compliance gatekeeper.
+- Question audit: remove leading questions, remove future-facing “would you use this?” questions, prefer “tell me about the last time...” prompts, and add probes for vague answers.
+- Synthesis cadence: after every five interviews, summarize supporting evidence, challenging evidence, surprising findings, segment differences, and what the founder may be over-interpreting.
+
+#### Optional bridge: lightweight prototype
+
+After problem validation but before committing to an MVP, build only the single core interaction required to test the solution concept. Use it with five people from the validated target profile.
+
+The prototype is not validation by itself. It is a conversation instrument to test whether the proposed solution matches the validated problem, whether users understand the value quickly, and which solution assumptions fail under real interaction.
+
 ---
 
 ### Stage 2: MVP — prove the solution creates value
@@ -98,8 +140,9 @@ Do not use this skill for:
 
 **Exit criteria:**
 
-- Real product-market-fit signals exist: retention, repeated use, revenue, referral, or strong pull from a specific segment
-- The signal persists beyond the launch spike
+- Real product-market-fit signals exist: retention, repeated use, revenue, referral, strong pull from a specific segment, or Sean Ellis-style “very disappointed” responses from active users
+- The product begins to pull users back without heroic founder intervention
+- The signal persists across multiple iteration cycles, not just the launch spike
 - The founder can explain who retains, why they retain, and what behavior predicts retention
 
 **Risks:**
@@ -145,6 +188,7 @@ Do not use this skill for:
 **Work to do:**
 
 - Convert founder knowledge into documents, playbooks, skills, evals, and operating rules
+- Convert domain expertise into proprietary context: industry edge cases, regulatory gotchas, customer workflows, jargon, decision rules, and reasons generic solutions fail
 - Build enterprise-grade support, SLAs, documentation, incident response, and compliance posture
 - Create repeatable GTM motions: segmentation, messaging, sales playbooks, partner/analyst narrative
 - Turn product usage into a data/product improvement flywheel
@@ -163,6 +207,33 @@ Do not use this skill for:
 - GTM still depends on founder hustle
 - “Moat” is a slogan rather than a data, workflow, integration, or trust advantage
 - Automation replaces judgment in places where judgment is still required
+
+---
+
+## Required AI Coding Context
+
+Before building an MVP, create a durable project context file such as `CLAUDE.md`, `AGENTS.md`, or an equivalent agent-readable architecture context.
+
+It should include:
+
+- Product: core user, core problem, core product loop, explicit non-goals.
+- Architecture: chosen stack, architectural principles, dependencies to prefer, dependencies to avoid, expected scale for the next six months, and MVP tradeoffs accepted for speed.
+- Security constraints: data handled, authentication model, secrets handling, PII/sensitive data boundaries, audit expectations.
+- Session protocol: start each coding session by reading scope and context; state the specific task and constraints; do not add features outside the scope document; end each session by logging decisions, assumptions, and files changed.
+
+## Security and Compliance by Stage
+
+### MVP security minimum
+
+Before real users touch the product, review authentication/session handling, authorization boundaries, secrets management, data exposure in API responses, input validation/injection risks, dependency vulnerabilities, PII or sensitive data handling, and logs that might leak sensitive data.
+
+### Launch security/compliance workstream
+
+Before production growth, prioritize remediation from the MVP review, add monitoring and alerting, define access management, identify relevant compliance frameworks such as SOC 2, GDPR, HIPAA, PCI, or industry-specific requirements, and maintain compliance documentation as part of the development cycle.
+
+### Scale enterprise readiness
+
+Before enterprise or institutional scrutiny, prepare incident response, SLA definitions, support escalation paths, security-questionnaire answers, data retention/deletion policies, vendor/procurement documentation, and independent review when risk warrants it.
 
 ---
 
@@ -230,6 +301,9 @@ List the evidence required for the current stage.
 - Why existing alternatives fail
 - Behavioral willingness-to-pay signals: time, data, budget, introduction, manual workaround
 - Data access and trust constraints: sensitive data, permissions, integrations, auditability, and compliance blockers
+- Market sizing: TAM / SAM / SOM estimate, assumptions behind each number, weakest assumption, and whether the market is expanding, consolidating, or mature
+- Buyer landscape: economic buyer, daily user, technical evaluator, influencer, blocker, procurement/compliance gatekeeper
+- Market timing: regulatory trends, technology shifts, demographic or workflow changes, and 24-month tailwinds/headwinds
 
 **MVP gaps:**
 
@@ -239,6 +313,7 @@ List the evidence required for the current stage.
 - Revenue, referral, or repeat-use signal
 - False PMF indicators
 - Feature admission criteria
+- PMF test design: Sean Ellis survey among active users, % “very disappointed” without the product, effort test, false positives such as signups without activation or revenue without retention, and whether signal holds across multiple iteration cycles
 
 **Launch gaps:**
 
@@ -255,6 +330,7 @@ List the evidence required for the current stage.
 - Repeatable GTM motion
 - Data/product flywheel
 - Workflow lock-in and integration depth
+- Proprietary context depth: what domain knowledge exists only in the founder's head, which edge cases are encoded into product/tests/prompts/workflows, and which expert workflows have become reusable skills or playbooks
 - Evidence-backed moat narrative
 
 ---
@@ -265,7 +341,7 @@ Use three perspectives. If subagents are available, run them in parallel. If not
 
 #### 1. Research Agent
 
-Focus: market, competitors, user language, alternatives, failed products, procurement path, market timing.
+Focus: market size, TAM/SAM/SOM assumptions, competitors, indirect alternatives, failed products, user language, buyer landscape, procurement path, and market timing.
 
 Must answer:
 
@@ -275,6 +351,9 @@ Must answer:
 - Strongest supporting evidence:
 - Strongest opposing evidence:
 - Biggest uncertainty:
+- TAM / SAM / SOM estimate and weakest assumptions:
+- Buyer landscape: user, buyer, influencer, blocker, procurement gatekeeper:
+- Market timing: key tailwinds and headwinds:
 - Recommended next experiment:
 ```
 
@@ -367,7 +446,7 @@ Each run should produce at least one asset future agents can reuse.
 Recommended artifacts:
 
 - Idea: `problem_hypothesis.md`, `customer_discovery_plan.md`, `interview_synthesis.md`
-- MVP: `mvp_scope.md`, `architecture_context.md`, `metrics_framework.md`, `security_review.md`
+- MVP: `mvp_scope.md`, `CLAUDE.md` or `architecture_context.md`, `session_log.md`, `metrics_framework.md`, `security_review.md`
 - Launch: `tech_debt_audit.md`, `founder_bottleneck_map.md`, `product_ops_system.md`
 - Scale: `enterprise_readiness_gap.md`, `gtm_playbook.md`, `moat_narrative.md`, `workflow_lockin_audit.md`
 
@@ -444,7 +523,7 @@ Output:
 1. The most specific problem hypothesis: who, workflow, frequency, pain, current workaround
 2. Five riskiest assumptions
 3. Strongest argument that this is not worth building
-4. Ten customer discovery questions; avoid “Would you use this?” questions
+4. A customer discovery plan: exact personas to interview, where to find them, separate question sets for user/buyer/influencer if needed, ten non-leading questions focused on past behavior, follow-up probes for vague answers, and a synthesis template to run after every five interviews
 5. Exit criteria before building an MVP
 ```
 
@@ -469,6 +548,51 @@ Output:
 7. Activation, retention, and false-PMF metrics
 ```
 
+### MVP: diagnose PMF signal quality
+
+```text
+Use this after launch or after several product iterations.
+
+Input:
+- Activation data:
+- Retention data:
+- Revenue:
+- Referral:
+- User feedback:
+- Founder interventions required to keep users active:
+- Sean Ellis survey results, if available:
+
+Output:
+1. Strongest evidence for PMF
+2. Strongest evidence against PMF
+3. False-positive risks
+4. Whether usage is pulled by the product or pushed by founder effort
+5. Segment that appears most strongly retained
+6. Next experiment to confirm, narrow, pivot, or return to Idea stage
+```
+
+### MVP: pivot diagnostic
+
+```text
+Use after three or more iteration cycles without meaningful movement toward PMF benchmarks.
+
+Input:
+- Original problem hypothesis:
+- Current segment:
+- Retention data:
+- Activation data:
+- User feedback:
+- Product changes tried:
+- Messaging changes tried:
+
+Output:
+1. Is any segment responding materially better than the rest?
+2. Is the gap a positioning problem, onboarding problem, product problem, or problem-selection problem?
+3. What would have to be true for the current product to reach PMF?
+4. Is that scenario realistic given the evidence?
+5. Recommendation: continue, narrow segment, reposition, rebuild, or return to Idea stage
+```
+
 ### Launch: audit founder bottlenecks
 
 ```text
@@ -481,11 +605,13 @@ Input:
 - Support/sales/product/engineering workflows:
 
 Output:
-1. Processes that only happen because the founder remembers or personally acts
-2. Categorization: automate / delegate / keep founder-owned
-3. Production security, reliability, and compliance gaps
-4. Five highest-ROI system-building actions for the next two weeks
-5. Markets, features, or channels not to expand into yet
+1. Founder bottleneck inventory: recurring tasks, decisions waiting on founder, approvals routed through founder, support answers only founder knows, sales/customer-success steps only founder can perform, and reports or rituals that only happen when founder remembers
+2. One-week absence test: which workflows stall if the founder is unavailable, why they stall, and what context/automation/delegation/escalation path is missing
+3. Categorization: automate / delegate / document / keep founder-owned
+4. Founder-only work to protect: product narrative, strategic tradeoffs, enterprise relationship moments, board/investor relationships, high-stakes hiring or partnership decisions
+5. Production security, reliability, and compliance gaps
+6. Five highest-ROI system-building actions for the next two weeks
+7. Markets, features, or channels not to expand into yet
 ```
 
 ### Scale: review moat and auditability
@@ -503,10 +629,26 @@ Input:
 Output:
 1. Ten questions external reviewers will ask
 2. Whether the data flywheel is real and what evidence is missing
-3. Workflow lock-in depth by customer segment
+3. Workflow lock-in audit by customer segment: integrations, automations, team workflows, APIs/webhooks/SDK usage, switching cost, and next lock-in deepening opportunity
 4. Enterprise readiness gaps
-5. One-page moat narrative draft
+5. Proprietary context audit: domain edge cases, regulatory gotchas, reusable expert workflows, and eval/test coverage
+6. One-page moat narrative draft
 ```
+
+---
+
+## Workflow Lock-in Audit Template
+
+For each key customer or segment, document:
+
+- Core workflows running through the product
+- Integrations connected
+- Automations built on top of the product
+- Teams trained on the workflow
+- Customer-specific prompts, templates, or operating procedures
+- APIs, webhooks, or SDK usage
+- Estimated switching cost: low = replaceable tool; medium = workflow disruption; high = operational migration project
+- Next integration or automation that would deepen lock-in
 
 ---
 
